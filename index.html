@@ -150,26 +150,26 @@
       <section class="personal">
         <div class="title2">
           <div class="front3">
-            <p>Personal PROJECT</p>
+            <p>Personal</p>
           </div>
           <div class="back3">
-            <p>Personal PROJECT</p>
+            <p>Personal</p>
           </div>
         </div>
         <div class="title2">
           <div class="front4">
-            <p>Personal PROJECT</p>
+            <p>Personal</p>
           </div>
           <div class="back4">
-            <p>Personal PROJECT</p>
+            <p>Personal</p>
           </div>
         </div>
         <div class="title2">
           <div class="front5">
-            <p>Personal PROJECT</p>
+            <p>Personal</p>
           </div>
           <div class="back5">
-            <p>Personal PROJECT</p>
+            <p>Personal</p>
           </div>
         </div>
 
@@ -178,6 +178,32 @@
         <div class="bg bg3"></div>
 
         <div class="container">
+          <div class="projectWrap">
+            <div class="title2">
+              <div class="front3">
+                <p>PROJECT</p>
+              </div>
+              <div class="back3">
+                <p>PROJECT</p>
+              </div>
+            </div>
+            <div class="title2">
+              <div class="front4">
+                <p>PROJECT</p>
+              </div>
+              <div class="back4">
+                <p>PROJECT</p>
+              </div>
+            </div>
+            <div class="title2">
+              <div class="front5">
+                <p>PROJECT</p>
+              </div>
+              <div class="back5">
+                <p>PROJECT</p>
+              </div>
+            </div>
+          </div>
           <div class="conImg">
             <img src="img/cwindex.png" alt="바꿔야함" />
           </div>
@@ -294,9 +320,9 @@
           <li class="a"><img src="img/pf1.png" /></li>
           <li class="b"><img src="img/pf2.png" /></li>
           <li class="c"><img src="img/pf3.png" /></li>
-          <li class="a"><img src="img/pf1.png" /></li>
-          <li class="b"><img src="img/pf2.png" /></li>
-          <li class="c"><img src="img/pf3.png" /></li>
+          <li class="a"><img src="img/pf4.png" /></li>
+          <li class="b"><img src="img/pf5.png" /></li>
+          <li class="c"><img src="img/pf6.png" /></li>
         </ul>
       </section>
       <section class="java">
@@ -409,7 +435,6 @@
             scrub: 2,
           },
         })
-
         .to(
           ".teamProject .title",
           {
@@ -423,18 +448,39 @@
         )
         .to(".front2", { color: "#fff" }, 0);
 
+      // 2. worklist 영역을 pin으로 고정하고 li들이 스크롤시 올라가는 효과
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".worklist",
+            start: "top top", // worklist가 화면 상단에 도달하면 시작
+            end: "+=1000", // 2000px 동안 스크롤 효과 지속 (li 개수나 원하는 길이에 맞게 조정 가능)
+            scrub: 1, // 스크롤에 부드럽게 반응
+            pin: true, // worklist 영역을 고정
+          },
+        })
+        .to(
+          ".worklist li",
+          {
+            y: "-50%", // li들을 위로 이동 (음수값이 위로 올라가는 효과)
+            stagger: 0.1, // 각 li마다 0.2초씩 순차적으로 애니메이션 적용
+            ease: "none", // 일정한 속도로 이동
+          },
+          0
+        );
+
       // 3. worklist가 끝날 때 타이틀이 밖으로 사라지는 효과
       gsap
         .timeline({
           scrollTrigger: {
             trigger: ".worklist",
-            start: "80% 50%",
-            end: "100% 30%",
+            start: "60% 50%",
+            end: "90% 50%",
             scrub: 2,
           },
         })
-        .to(".teamProject .Team", { y: "-100%", opacity: 0 }, 0)
-        .to(".teamProject .Project", { y: "100%", opacity: 0 }, 0);
+        .to(".teamProject .Team", { y: "-100%", opacity: 0 }, 0) // Team 텍스트 위로 사라짐
+        .to(".teamProject .Project", { y: "100%", opacity: 0 }, 0); // Project 텍스트 아래로 사라짐
     </script>
   </body>
 </html>
