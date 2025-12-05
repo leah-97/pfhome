@@ -95,6 +95,7 @@
                 <li><img src="img/Group 20.png" alt="피그마 아이콘" /></li>
                 <li><img src="img/Group 21.png" alt="부트스트랩 아이콘" /></li>
                 <li><img src="img/Vector.png" alt="깃허브 아이콘" /></li>
+                <li><img src="img/Group 19.png" alt="스와이퍼 아이콘" /></li>
               </ul>
             </li>
           </ul>
@@ -124,7 +125,6 @@
               <p>
                 page1 product(과자박스 container jQery 및 자바스크립트 구현),
               </p>
-
               <p>회사신조, page3 제작</p>
             </div>
             <div class="btnBox">
@@ -134,7 +134,7 @@
           </li>
           <li>
             <div class="workImg">
-              <a href="#"><img src="img/cwindex.png" alt="" /></a>
+              <a href="#"><img src="img/pf4.png" alt="" /></a>
             </div>
             <div class="workWord">
               <h4>02 개인정보보호 캠페인</h4>
@@ -206,6 +206,8 @@
           </div>
           <div class="conImg">
             <img src="img/cwindex.png" alt="바꿔야함" />
+            <img src="img/cwindex.png" alt="바꿔야함" />
+            <img src="img/cwindex.png" alt="바꿔야함" />
           </div>
 
           <ul class="conproject">
@@ -259,22 +261,23 @@
           </div>
         </div>
       </section>
-      <section class="clonebg">
-        <div class="bg4 cbg"></div>
-        <div class="bg5 cbg"></div>
-        <div class="bg6 cbg"></div>
-        <div class="bg7 cbg"></div>
-        <div class="bg8 cbg"></div>
-        <div class="cloneRotate">
-          <h4 class="front12">CLONE</h4>
-          <h4 class="back12">CLONE</h4>
-        </div>
-        <div class="cloneBot">
-          <h4 class="front13">CODING</h4>
-          <h4 class="back13">CODING</h4>
-        </div>
-      </section>
       <section class="clone">
+        <div class="clonebg">
+          <div class="bg4 cbg"></div>
+          <div class="bg5 cbg"></div>
+          <div class="bg6 cbg"></div>
+          <div class="bg7 cbg"></div>
+          <div class="bg8 cbg"></div>
+          <div class="cloneRotate">
+            <h4 class="front12">CLONE</h4>
+            <h4 class="back12">CLONE</h4>
+          </div>
+          <div class="cloneBot">
+            <h4 class="front13">CODING</h4>
+            <h4 class="back13">CODING</h4>
+          </div>
+        </div>
+
         <div class="cloneWork">
           <div class="cloneProject">
             <div class="cloneWorkImg">
@@ -287,8 +290,8 @@
                 <img src="img/Group 11.png" alt="아이콘 추가 필요" />
               </span>
               <div class="btnBox2">
-                <button>기획안</button>
-                <button>페이지 이동</button>
+                <button class="cbtn">기획안</button>
+                <button class="cbtn">페이지 이동</button>
               </div>
             </div>
           </div>
@@ -297,11 +300,14 @@
               <h4>프로젝트 이름</h4>
               <p>선정이유 등 소개 넣기</p>
               <span class="icon">
-                <img src="img/Group 11.png" alt="아이콘 추가 필요" />
+                <img src="img/Group 20.png" alt="css아이콘" />
+                <img src="img/Group 12.png" alt="css아이콘" />
+                <img src="img/Group 11.png" alt="css아이콘" />
+                <img src="img/Group 1.png" alt="css아이콘" />
               </span>
               <div class="btnBox2">
-                <button>기획안</button>
-                <button>페이지 이동</button>
+                <button class="cbtn">기획안</button>
+                <button class="cbtn">페이지 이동</button>
               </div>
             </div>
             <div class="cloneWorkImg">
@@ -368,8 +374,17 @@
 
       // page1 애니메이션
       const tl = gsap.timeline();
-      tl.fromTo(".page1 .yellowBox", { x: 2000 }, { x: 950, duration: 1 });
-      tl.fromTo(".page1 .greenBox1", { y: -900 }, { y: -30 });
+      // 1) 옐로 + 그린 동시에 이동
+      tl.fromTo(
+        ".page1 .yellowBox",
+        { x: 2000 },
+        { x: 950, duration: 1 }
+      ).fromTo(
+        ".page1 .greenBox1",
+        { y: -900 },
+        { y: -30, duration: 1 },
+        "<" // ⬅ 동시에 시작!
+      );
       tl.from(".wordBox1", { opacity: 0, delay: 0.5 });
 
       // information 등장
@@ -448,39 +463,188 @@
         )
         .to(".front2", { color: "#fff" }, 0);
 
-      // 2. worklist 영역을 pin으로 고정하고 li들이 스크롤시 올라가는 효과
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".worklist",
-            start: "top top", // worklist가 화면 상단에 도달하면 시작
-            end: "+=1000", // 2000px 동안 스크롤 효과 지속 (li 개수나 원하는 길이에 맞게 조정 가능)
-            scrub: 1, // 스크롤에 부드럽게 반응
-            pin: true, // worklist 영역을 고정
-          },
-        })
-        .to(
-          ".worklist li",
-          {
-            y: "-50%", // li들을 위로 이동 (음수값이 위로 올라가는 효과)
-            stagger: 0.1, // 각 li마다 0.2초씩 순차적으로 애니메이션 적용
-            ease: "none", // 일정한 속도로 이동
-          },
-          0
-        );
+      // 2. worklist - 홀수는 위로, 짝수는 아래로
+      const t2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".worklist",
+          start: "top top",
+          end: "+=800",
+          scrub: 1,
+          pin: true,
+        },
+      });
+
+      // 홀수 li (왼쪽) - 위로
+      t2.to(
+        ".worklist li:nth-child(odd)",
+        {
+          y: "-60%",
+          ease: "none",
+        },
+        0
+      );
+
+      // 짝수 li (오른쪽) - 아래로
 
       // 3. worklist가 끝날 때 타이틀이 밖으로 사라지는 효과
       gsap
         .timeline({
           scrollTrigger: {
             trigger: ".worklist",
-            start: "60% 50%",
-            end: "90% 50%",
+            start: "50% 80%",
+            end: "50% 80%",
             scrub: 2,
           },
         })
-        .to(".teamProject .Team", { y: "-100%", opacity: 0 }, 0) // Team 텍스트 위로 사라짐
-        .to(".teamProject .Project", { y: "100%", opacity: 0 }, 0); // Project 텍스트 아래로 사라짐
+        .to(".teamProject .Team", { y: "-100%", opacity: 0 }, 0)
+        .to(".teamProject .Project", { y: "100%", opacity: 0 }, 0);
+
+      gsap.from(
+        ".personal > .title2:nth-child(1)",
+
+        {
+          left: "-50%",
+
+          scrollTrigger: {
+            trigger: ".personal",
+            start: "top 80%",
+            end: "top 30%",
+            scrub: 2,
+          },
+        }
+      );
+      gsap.from(
+        ".personal > .title2:nth-child(2)",
+
+        {
+          left: "-50%",
+
+          scrollTrigger: {
+            trigger: ".personal",
+            start: "top 80%",
+            end: "top 30%",
+            scrub: 2,
+          },
+        }
+      );
+      gsap.from(
+        ".personal > .title2:nth-child(3)",
+
+        {
+          left: "-50%",
+
+          scrollTrigger: {
+            trigger: ".personal",
+            start: "top 80%",
+            end: "top 30%",
+            scrub: 2,
+          },
+        }
+      );
+
+      // 2. PROJECT 타이틀 애니메이션 - 세로 상태(rotation: -90) 유지하며 아래로만 이동
+      gsap.fromTo(
+        ".projectWrap .title2:nth-child(1)",
+        {
+          left: "5%",
+          top: "0%",
+          rotation: -90, // 시작부터 세로
+          transform: "translate(0, 0) rotate(-90deg)",
+        },
+        {
+          left: "0",
+          top: "50%",
+          rotation: -90, // 세로 유지
+          transform: "translateY(-50%) rotate(-90deg)",
+          scrollTrigger: {
+            trigger: ".personal",
+            start: "top 80%",
+            end: "top 30%",
+            scrub: 2,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".projectWrap .title2:nth-child(2)",
+        {
+          left: "5%",
+          top: "0%",
+          rotation: -90,
+          transform: "translate(0, 0) rotate(-90deg)",
+        },
+        {
+          left: "0",
+          top: "50%",
+          rotation: -90,
+          transform: "translateY(-50%) rotate(-90deg)",
+          scrollTrigger: {
+            trigger: ".personal",
+            start: "top 80%",
+            end: "top 30%",
+            scrub: 2,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".projectWrap .title2:nth-child(3)",
+        {
+          left: "5%",
+          top: "0%",
+          rotation: -90,
+          transform: "translate(0, 0) rotate(-90deg)",
+        },
+        {
+          left: "0",
+          top: "50%",
+          rotation: -90,
+          transform: "translateY(-50%) rotate(-90deg)",
+          scrollTrigger: {
+            trigger: ".personal",
+            start: "top 80%",
+            end: "top 30%",
+            scrub: 2,
+          },
+        }
+      );
+
+      // 3. 배경 색상 전환 애니메이션 (teamProject에서 personal로)
+      gsap.fromTo(
+        ".personal",
+        {
+          backgroundColor: "#000",
+        },
+        {
+          backgroundColor: "#f6eee1",
+          scrollTrigger: {
+            trigger: ".personal",
+            start: "top bottom",
+            end: "top center",
+            scrub: 2,
+          },
+        }
+      );
+
+      gsap.utils.toArray(".cbg").forEach((bg, index) => {
+        gsap.fromTo(
+          bg,
+          {
+            x: "100%", // 오른쪽 밖에서 시작
+          },
+          {
+            x: "0%", // 왼쪽으로 이동하며 덮음
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".clonebg",
+              start: "top bottom", // 섹션이 화면에 들어올 때 시작
+              end: "center center", // 중앙까지
+              scrub: 1,
+            },
+            delay: index * 0.02, // 아주 짧은 간격으로 순차적
+          }
+        );
+      });
     </script>
   </body>
 </html>
