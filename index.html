@@ -115,9 +115,7 @@
         <ul class="worklist">
           <li>
             <div class="workImg">
-              <a href="#"
-                ><img src="img/cwindex.png" alt="청우식품리뉴얼페이지"
-              /></a>
+              <a href="#"><img src="img/pf4.png" alt="" /></a>
             </div>
             <div class="workWord">
               <h4>01 청우식품 홈페이지 리뉴얼</h4>
@@ -127,19 +125,26 @@
               </p>
               <p>회사신조, page3 제작</p>
             </div>
-            <div class="btnBox">
-              <button>기획안</button>
-              <button>페이지 이동</button>
+            <div class="workIcon">
+              <ul>
+                <li><img src="img/Group 11.png" alt="CSS 아이콘" /></li>
+                <li><img src="img/Group 12.png" alt="HTML 아이콘" /></li>
+                <li><img src="img/Group 23.png" alt="gsap 아이콘" /></li>
+                <li><img src="img/Group 1.png" alt="제이쿼리 아이콘" /></li>
+                <li><img src="img/Group 20.png" alt="피그마 아이콘" /></li>
+                <li>
+                  <img src="img/Group 17.png" alt="자바스크립트 아이콘" />
+                </li>
+              </ul>
             </div>
           </li>
           <li>
             <div class="workImg">
-              <a href="#"><img src="img/pf4.png" alt="" /></a>
+              <a href="#"
+                ><img src="img/cwindex.png" alt="청우식품리뉴얼페이지"
+              /></a>
             </div>
-            <div class="workWord">
-              <h4>02 개인정보보호 캠페인</h4>
-              <p>프로젝트 설명</p>
-            </div>
+
             <div class="btnBox">
               <button>기획안</button>
               <button>페이지 이동</button>
@@ -204,29 +209,33 @@
               </div>
             </div>
           </div>
-          <div class="conImg">
-            <img src="img/cwindex.png" alt="바꿔야함" />
-            <img src="img/cwindex.png" alt="바꿔야함" />
-            <img src="img/cwindex.png" alt="바꿔야함" />
-          </div>
 
-          <ul class="conproject">
-            <li>
-              <h4>프로젝트 이름</h4>
-              <p>프로젝트 설명</p>
-              <p>프로젝트 소요기간, 컨셉 등 작성</p>
-            </li>
-            <li>
-              <h4>프로젝트 이름</h4>
-              <p>프로젝트 설명</p>
-              <p>프로젝트 소요기간, 컨셉 등 작성</p>
-            </li>
-            <li>
-              <h4>프로젝트 이름</h4>
-              <p>프로젝트 설명</p>
-              <p>프로젝트 소요기간, 컨셉 등 작성</p>
-            </li>
-          </ul>
+          <div class="conImg">
+            <div class="imgSlideWrap">
+              <img src="img/cwindex.png" alt="바꿔야함" />
+              <img src="img/cwindex.png" alt="바꿔야함" />
+              <img src="img/cwindex.png" alt="바꿔야함" />
+            </div>
+          </div>
+          <div class="textSlideWrap">
+            <ul class="conproject">
+              <li>
+                <h4>프로젝트 이름</h4>
+                <p>프로젝트 설명</p>
+                <p>프로젝트 소요기간, 컨셉 등 작성</p>
+              </li>
+              <li>
+                <h4>프로젝트 이름</h4>
+                <p>프로젝트 설명</p>
+                <p>프로젝트 소요기간, 컨셉 등 작성</p>
+              </li>
+              <li>
+                <h4>프로젝트 이름</h4>
+                <p>프로젝트 설명</p>
+                <p>프로젝트 소요기간, 컨셉 등 작성</p>
+              </li>
+            </ul>
+          </div>
           <div class="arrBox">
             <div class="arr1">
               <div class="arr">
@@ -261,7 +270,7 @@
           </div>
         </div>
       </section>
-      <section class="clone">
+      <!-- <section class="clone">
         <div class="clonebg">
           <div class="bg4 cbg"></div>
           <div class="bg5 cbg"></div>
@@ -315,7 +324,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
       <section class="Art">
         <div class="textBox">
           <h4 class="front14">ART WORK</h4>
@@ -329,6 +338,7 @@
           <li class="a"><img src="img/pf4.png" /></li>
           <li class="b"><img src="img/pf5.png" /></li>
           <li class="c"><img src="img/pf6.png" /></li>
+          <li class="a"><img src="img/pf7.png" /></li>
         </ul>
       </section>
       <section class="java">
@@ -466,9 +476,9 @@
       // 2. worklist - 홀수는 위로, 짝수는 아래로
       const t2 = gsap.timeline({
         scrollTrigger: {
-          trigger: ".worklist",
+          trigger: ".teamProject",
           start: "top top",
-          end: "+=800",
+          end: "+=1200",
           scrub: 1,
           pin: true,
         },
@@ -476,9 +486,9 @@
 
       // 홀수 li (왼쪽) - 위로
       t2.to(
-        ".worklist li:nth-child(odd)",
+        ".worklist > li:nth-child(even)",
         {
-          y: "-60%",
+          y: "-30%",
           ease: "none",
         },
         0
@@ -644,6 +654,50 @@
             delay: index * 0.02, // 아주 짧은 간격으로 순차적
           }
         );
+      });
+
+      let list = gsap.utils.toArray(".Art li");
+      let listA = gsap.utils.toArray(".Art li.a");
+      let listB = gsap.utils.toArray(".Art li.b");
+      let listC = gsap.utils.toArray(".Art li.c");
+
+      gsap.to(list, {
+        xPercent: -400, //x축으로 왼쪽 방향 400%만큼 이동
+        scrollTrigger: {
+          trigger: ".Art",
+          start: "top top",
+          end: "+=2000",
+          scrub: 2,
+          pin: true,
+          markers: true,
+        },
+      });
+
+      gsap.to(listA, {
+        rotation: -10,
+        scrollTrigger: {
+          trigger: ".Art",
+          start: "center center",
+          scrub: 2,
+        },
+      });
+      gsap.to(listB, {
+        rotation: 30,
+        scrollTrigger: {
+          trigger: ".Art",
+          start: "center center",
+
+          scrub: 2,
+        },
+      });
+      gsap.to(listC, {
+        rotation: -20,
+        scrollTrigger: {
+          trigger: ".Art",
+          start: "center center",
+
+          scrub: 2,
+        },
       });
     </script>
   </body>
